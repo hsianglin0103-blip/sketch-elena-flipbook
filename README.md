@@ -1,5 +1,7 @@
 # Sketch Elena — Flipbook
 
+**View it:** https://hsianglin0103-blip.github.io/sketch-elena-flipbook/
+
 A page-turning web viewer for the Sketch Elena book: 30 drawings on 12 × 12 in square pages, each with a page number at the bottom.
 
 Open `index.html` in a browser, or publish the folder with GitHub Pages (Settings → Pages → Deploy from branch → `main` / root).
