@@ -6,6 +6,24 @@
 <meta name="color-scheme" content="light dark">
 <title>Sketches — Sheng Hsiang Lin</title>
 <meta name="description" content="Sketches by Sheng Hsiang Lin: a 62-page, 8 × 10 in book you can page through.">
+<link rel="canonical" href="https://hsianglin0103-blip.github.io/sketch-elena-flipbook/sketches/">
+<!-- Link cards and embeds (Miro, Slack, etc.) read these -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sheng Hsiang Lin">
+<meta property="og:title" content="Sketches — Sheng Hsiang Lin">
+<meta property="og:description" content="A 62-page, 8 × 10 in book. Turn the pages right here.">
+<meta property="og:url" content="https://hsianglin0103-blip.github.io/sketch-elena-flipbook/sketches/">
+<meta property="og:image" content="https://hsianglin0103-blip.github.io/sketch-elena-flipbook/sketches/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="player">
+<meta name="twitter:title" content="Sketches — Sheng Hsiang Lin">
+<meta name="twitter:description" content="A 62-page, 8 × 10 in book. Turn the pages right here.">
+<meta name="twitter:image" content="https://hsianglin0103-blip.github.io/sketch-elena-flipbook/sketches/preview.jpg">
+<meta name="twitter:player" content="https://hsianglin0103-blip.github.io/sketch-elena-flipbook/sketches/?embed=1">
+<meta name="twitter:player:width" content="1280">
+<meta name="twitter:player:height" content="800">
+<link rel="alternate" type="application/json+oembed" href="https://hsianglin0103-blip.github.io/sketch-elena-flipbook/sketches/oembed.json" title="Sketches — Sheng Hsiang Lin">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -382,6 +400,16 @@ body {
   .tbtn { width: 32px; }
   .scrub { padding-inline: 4px; }
 }
+/* embedded on a board or another page: tighter chrome, a way out to the full page */
+.tbtn--open { display: none; text-decoration: none; }
+.is-embedded .tbtn--open { display: grid; }
+.is-embedded .bar { padding-block: 8px 2px; }
+.is-embedded .tools { padding-block: 4px 8px; }
+.is-embedded .stage { grid-template-columns: 40px minmax(0, 1fr) 40px; }
+.is-embedded .nav svg { width: 24px; height: 24px; }
+@media (max-width: 900px) { .is-embedded .bar__meta { display: none; } }
+@media (max-width: 760px) { .is-embedded .stage { grid-template-columns: 0 minmax(0, 1fr) 0; } }
+
 @media (prefers-reduced-motion: reduce) {
   .overlay, .sheet img, .stf__item::before, .spread__pages { animation: none; transition: none; }
 }
@@ -441,6 +469,9 @@ body {
       <button class="tbtn" id="btnZoom" type="button" aria-label="Zoom in on this spread" title="Zoom (Z)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5M10.5 8v5M8 10.5h5"/></svg>
       </button>
+      <a class="tbtn tbtn--open" id="btnOpen" href="https://hsianglin0103-blip.github.io/sketch-elena-flipbook/sketches/" target="_blank" rel="noopener" aria-label="Open the book in a new tab" title="Open in a new tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+      </a>
       <button class="tbtn" id="btnFull" type="button" aria-label="Full screen" title="Full screen (F)" aria-pressed="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
       </button>
@@ -495,6 +526,12 @@ body {
 
   const $ = (id) => document.getElementById(id);
   const app = $('app'), book = $('book'), frame = $('frame'), center = $('center');
+
+  // Inside an iframe (a Miro card, a website) or opened with ?embed=1
+  let framed = false;
+  try { framed = window.self !== window.top; } catch (e) { framed = true; }
+  const embedded = framed || new URLSearchParams(location.search).has('embed');
+  document.documentElement.classList.toggle('is-embedded', embedded);
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const FLIP_MS = reduceMotion ? 300 : 820;
 
@@ -605,6 +642,7 @@ body {
     ['navPrev', 'btnPrev', 'btnFirst'].forEach((id) => $(id).disabled = atStart);
     ['navNext', 'btnNext', 'btnLast'].forEach((id) => $(id).disabled = atEnd);
     try { history.replaceState(null, '', '#p' + (s[0] + 1)); } catch (e) {}
+    $('btnOpen').href = $('btnOpen').href.split('#')[0] + '#p' + (s[0] + 1);
     if (!$('gridPanel').hidden) markGrid();
   }
   pf.on('flip', (e) => sync(e.data));

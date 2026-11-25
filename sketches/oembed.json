@@ -1,0 +1,14 @@
+{
+ "version": "1.0",
+ "type": "rich",
+ "title": "Sketches — Sheng Hsiang Lin",
+ "author_name": "Sheng Hsiang Lin",
+ "provider_name": "Sheng Hsiang Lin",
+ "provider_url": "https://hsianglin0103-blip.github.io/sketch-elena-flipbook/",
+ "width": 1280,
+ "height": 800,
+ "html": "<iframe src=\"https://hsianglin0103-blip.github.io/sketch-elena-flipbook/sketches/?embed=1\" width=\"1280\" height=\"800\" style=\"border:0\" allow=\"fullscreen\" allowfullscreen title=\"Sketches — Sheng Hsiang Lin\"></iframe>",
+ "thumbnail_url": "https://hsianglin0103-blip.github.io/sketch-elena-flipbook/sketches/preview.jpg",
+ "thumbnail_width": 1200,
+ "thumbnail_height": 630
+}
