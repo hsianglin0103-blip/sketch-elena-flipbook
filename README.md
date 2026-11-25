@@ -1,6 +1,8 @@
 # Sketch Elena — Flipbook
 
-**View it:** https://hsianglin0103-blip.github.io/sketch-elena-flipbook/
+**Sketches (the book, 62 pages, 8 × 10 in):** https://hsianglin0103-blip.github.io/sketch-elena-flipbook/sketches/
+
+**Image flipbook (12 × 12 in):** https://hsianglin0103-blip.github.io/sketch-elena-flipbook/
 
 A page-turning web viewer for the Sketch Elena book: 30 drawings on 12 × 12 in square pages, each with a page number at the bottom.
 
@@ -11,3 +13,7 @@ Open `index.html` in a browser, or publish the folder with GitHub Pages (Setting
 - Page turning uses [StPageFlip](https://github.com/Nodlik/StPageFlip) 2.0.7 (MIT), bundled in `vendor/`.
 
 Controls: click a page or drag a corner to turn, ← / → keys, Home / End, G for all pages, Z for zoom, F for full screen. Link to a page with `#p12`.
+
+## Sketches book (`sketches/`)
+
+The InDesign PDF export, page for page: 62 pages at 8 × 10 in. The PDF's spreads were split at the spine into single pages (`sketches/pages/p01.webp` … `p62.webp`, rendered at 200 dpi), so the cover and back cover sit alone and every spread pairs the same pages as the PDF. Nothing is added to the pages; the viewer only adds page turning.
